@@ -1,0 +1,56 @@
+CLIENTA ACCOUNT BRIEF
+=====================
+Last Updated: April 2026
+
+DEAL OVERVIEW
+-------------
+Account: ClientA
+Industry: Financial Services
+Deal Stage: Negotiation
+Deal Value: $180,000 ARR
+Contract Length: 3 years
+Expected Close Date: May 30, 2026
+Competing Vendor: LegacyTech Pro (incumbent, contract expiring June 2026)
+
+STAKEHOLDERS
+------------
+Champion:
+  Name: Jordan Mills
+  Title: VP of Revenue Operations
+  Influence: Strong
+  Notes: Has been pushing internally for 6 weeks. Needs executive sign-off before close.
+
+Economic Buyer:
+  Name: Dana Cho
+  Title: Chief Revenue Officer
+  Influence: High
+  Notes: Met once during discovery. Has not been re-engaged since. Jordan is managing up.
+
+Technical Evaluator:
+  Name: Priya Nair
+  Title: Director of Sales Technology
+  Influence: Moderate
+  Notes: Raised integration concerns in week 2. Satisfied after technical deep-dive but has not formally signed off.
+
+Late-Joining Stakeholder:
+  Name: Marcus Webb
+  Title: CFO
+  Influence: High
+  Notes: Joined the last call 20 minutes late. Has not been properly briefed. Jordan flagged this as a risk.
+
+OPEN QUESTIONS FROM LAST CALL
+------------------------------
+1. Pricing flexibility: Jordan asked whether we could bundle professional services into the ARR rather than billing separately. No clean answer was given. This needs to be resolved before next call.
+2. SLA commitments: Priya asked for 99.9% uptime SLA in writing. Legal is reviewing. Status: pending.
+
+PAIN POINTS IDENTIFIED
+-----------------------
+- Current tool requires manual data entry for 60% of pipeline updates
+- Forecast accuracy is at 54%, well below industry benchmark
+- RevOps team is spending 12+ hours per week on pipeline hygiene
+
+NEXT STEPS
+----------
+- Send revised pricing proposal with bundled PS option
+- Share SLA documentation once legal clears
+- Schedule a 30-minute briefing with Marcus Webb (CFO) before the final sign-off call

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pre-Call Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface-2: #1a1a24;
+      --border: #2a2a3a;
+      --accent: #6c63ff;
+      --accent-dim: rgba(108, 99, 255, 0.15);
+      --accent-glow: rgba(108, 99, 255, 0.4);
+      --text: #e8e8f0;
+      --text-dim: #8888a0;
+      --text-muted: #4a4a60;
+      --success: #4ade80;
+      --warning: #fbbf24;
+      --danger: #f87171;
+      --recording: #ff4d6d;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px;
+      background-image:
+        radial-gradient(ellipse 60% 40% at 50% 0%, rgba(108,99,255,0.08) 0%, transparent 70%);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+      animation: fadeDown 0.6s ease both;
+    }
+
+    .logo-mark {
+      width: 48px;
+      height: 48px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 22px;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: var(--text);
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-top: 4px;
+      font-weight: 300;
+    }
+
+    .main-card {
+      width: 100%;
+      max-width: 680px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+
+    .mic-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .mic-ring {
+      position: relative;
+      width: 100px;
+      height: 100px;
+    }
+
+    .mic-ring::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .mic-ring.recording::before {
+      border-color: var(--recording);
+      box-shadow: 0 0 24px rgba(255, 77, 109, 0.3);
+      animation: pulse-ring 1.2s ease infinite;
+    }
+
+    .mic-btn {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: none;
+      background: var(--surface-2);
+      border: 1.5px solid var(--border);
+      color: var(--text-dim);
+      font-size: 32px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mic-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+      transform: scale(1.03);
+    }
+
+    .mic-btn.recording {
+      background: rgba(255, 77, 109, 0.1);
+      border-color: var(--recording);
+      color: var(--recording);
+      box-shadow: 0 0 24px rgba(255, 77, 109, 0.25);
+    }
+
+    .mic-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .status-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.5px;
+      min-height: 18px;
+      transition: color 0.3s;
+    }
+
+    .status-text.active { color: var(--accent); }
+    .status-text.recording { color: var(--recording); }
+    .status-text.success { color: var(--success); }
+
+    .transcript-box {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 13px;
+      color: var(--text-dim);
+      font-family: 'DM Mono', monospace;
+      min-height: 44px;
+      margin-bottom: 32px;
+      transition: border-color 0.3s;
+      line-height: 1.6;
+    }
+
+    .transcript-box.has-content {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 32px;
+    }
+
+    .brief-container { display: none; }
+    .brief-container.visible { display: block; }
+
+    .brief-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .brief-sections {
+      display: grid;
+      gap: 16px;
+    }
+
+    .brief-section {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .brief-section:nth-child(1) { animation-delay: 0.05s; }
+    .brief-section:nth-child(2) { animation-delay: 0.1s; }
+    .brief-section:nth-child(3) { animation-delay: 0.15s; }
+    .brief-section:nth-child(4) { animation-delay: 0.2s; border-color: rgba(248, 113, 113, 0.3); }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .section-icon {
+      font-size: 14px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .brief-section:nth-child(4) .section-title { color: var(--danger); }
+
+    .section-content {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: var(--text);
+      white-space: pre-wrap;
+    }
+
+    .raw-brief {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--text);
+      white-space: pre-wrap;
+      font-family: 'DM Mono', monospace;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 24px;
+      filter: invert(1) hue-rotate(200deg) opacity(0.7);
+      border-radius: 8px;
+    }
+
+    .loading-dots {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .loading-dots span {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: bounce 1.2s ease infinite;
+    }
+
+    .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+      40% { transform: translateY(-6px); opacity: 1; }
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.08); opacity: 0.6; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo-mark">⚡</div>
+  <h1>Pre-Call Assistant</h1>
+  <p class="subtitle">Voice-activated deal intelligence, powered by MCP</p>
+</header>
+
+<div class="main-card">
+  <div class="mic-section">
+    <div class="mic-ring" id="micRing">
+      <button class="mic-btn" id="micBtn" title="Hold to record">🎙️</button>
+    </div>
+    <p class="status-text" id="statusText">Press to ask about an account</p>
+  </div>
+
+  <div class="transcript-box" id="transcriptBox">Your question will appear here...</div>
+
+  <div class="divider"></div>
+
+  <div class="brief-container" id="briefContainer">
+    <p class="brief-label">Pre-Call Brief</p>
+    <div id="briefContent"></div>
+    <audio id="audioPlayer" controls style="display:none;"></audio>
+  </div>
+</div>
+
+<script>
+  const micBtn = document.getElementById('micBtn');
+  const micRing = document.getElementById('micRing');
+  const statusText = document.getElementById('statusText');
+  const transcriptBox = document.getElementById('transcriptBox');
+  const briefContainer = document.getElementById('briefContainer');
+  const briefContent = document.getElementById('briefContent');
+  const audioPlayer = document.getElementById('audioPlayer');
+
+  let mediaRecorder = null;
+  let audioChunks = [];
+  let isRecording = false;
+  let stream = null;
+
+  function setStatus(text, type = '') {
+    statusText.textContent = text;
+    statusText.className = 'status-text' + (type ? ' ' + type : '');
+  }
+
+  function renderBrief(text) {
+    const sections = [
+      { key: 'DEAL STATUS', icon: '📊', id: 'deal' },
+      { key: 'RECENT EMAIL CONTEXT', icon: '📧', id: 'email' },
+      { key: 'OPEN QUESTIONS', icon: '❓', id: 'questions' },
+      { key: 'FLAGGED RISKS', icon: '⚠️', id: 'risks' },
+    ];
+
+    let html = '<div class="brief-sections">';
+    let remaining = text;
+
+    sections.forEach((section, i) => {
+      const start = remaining.indexOf(section.key);
+      if (start === -1) return;
+      const nextSection = sections.slice(i + 1).find(s => remaining.indexOf(s.key) > start);
+      const end = nextSection ? remaining.indexOf(nextSection.key) : remaining.length;
+      const content = remaining.slice(start + section.key.length, end).replace(/^[\s\-:]+/, '').trim();
+
+      html += `
+        <div class="brief-section">
+          <div class="section-header">
+            <span class="section-icon">${section.icon}</span>
+            <span class="section-title">${section.key}</span>
+          </div>
+          <div class="section-content">${content}</div>
+        </div>`;
+    });
+
+    if (html === '<div class="brief-sections">') {
+      html += `<div class="raw-brief">${text}</div>`;
+    }
+
+    html += '</div>';
+    return html;
+  }
+
+  async function startRecording() {
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      audioChunks = [];
+      mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+      mediaRecorder.start();
+      isRecording = true;
+      micBtn.classList.add('recording');
+      micRing.classList.add('recording');
+      micBtn.textContent = '⏹️';
+      setStatus('Recording... press again to stop', 'recording');
+    } catch (err) {
+      setStatus('Microphone access denied');
+      console.error(err);
+    }
+  }
+
+  async function stopRecording() {
+    return new Promise(resolve => {
+      mediaRecorder.onstop = resolve;
+      mediaRecorder.stop();
+      stream.getTracks().forEach(t => t.stop());
+      isRecording = false;
+      micBtn.classList.remove('recording');
+      micRing.classList.remove('recording');
+      micBtn.textContent = '🎙️';
+    });
+  }
+
+  micBtn.addEventListener('click', async () => {
+    if (isRecording) {
+      micBtn.disabled = true;
+      setStatus('Processing...', 'active');
+      await stopRecording();
+
+      const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+      const formData = new FormData();
+      formData.append('audio', audioBlob, 'recording.webm');
+
+      try {
+        // Step 1: Transcribe
+        setStatus('Transcribing...', 'active');
+        const transcribeRes = await fetch('/transcribe', { method: 'POST', body: formData });
+        const transcribeData = await transcribeRes.json();
+        const query = transcribeData.text;
+
+        transcriptBox.textContent = query;
+        transcriptBox.classList.add('has-content');
+
+        // Step 2: Generate brief
+        setStatus('Pulling context from Gmail and Drive...', 'active');
+        briefContainer.classList.remove('visible');
+        briefContent.innerHTML = `<div style="display:flex;align-items:center;gap:10px;color:var(--text-dim);font-size:13px;">
+          <div class="loading-dots"><span></span><span></span><span></span></div>
+          Retrieving account context via MCP...
+        </div>`;
+        briefContainer.classList.add('visible');
+
+        const briefRes = await fetch('/brief', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query })
+        });
+        const briefData = await briefRes.json();
+        const briefText = briefData.summary;
+
+        briefContent.innerHTML = renderBrief(briefText);
+
+        // Step 3: Text to speech
+        setStatus('Generating audio...', 'active');
+        const speakRes = await fetch('/speak', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: briefText })
+        });
+
+        const audioBuffer = await speakRes.arrayBuffer();
+        const blob = new Blob([audioBuffer], { type: 'audio/mpeg' });
+        const audioUrl = URL.createObjectURL(blob);
+        audioPlayer.src = audioUrl;
+        audioPlayer.style.display = 'block';
+        audioPlayer.play();
+
+        setStatus('Brief ready', 'success');
+        micBtn.disabled = false;
+
+      } catch (err) {
+        setStatus('Something went wrong. Check console.');
+        console.error(err);
+        micBtn.disabled = false;
+      }
+
+    } else {
+      await startRecording();
+    }
+  });
+</script>
+</body>
+</html>

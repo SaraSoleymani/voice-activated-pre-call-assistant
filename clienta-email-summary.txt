@@ -1,0 +1,64 @@
+CLIENTA EMAIL THREAD SUMMARY
+=============================
+Compiled: April 2026
+Participants: Alex (AE), Jordan Mills (VP RevOps, ClientA)
+
+---
+
+EMAIL THREAD 1: Pricing and Professional Services
+--------------------------------------------------
+Date: April 2, 2026
+From: Jordan Mills
+To: Alex
+
+"Hey Alex, following up from our last call. The team liked what they saw, but Dana is pushing back on the professional services being billed separately from the ARR. Is there any flexibility to bundle that in? It would make the internal approval process significantly easier on our end. Happy to jump on a quick call if easier."
+
+---
+
+Date: April 3, 2026
+From: Alex
+To: Jordan Mills
+
+"Hi Jordan, thanks for flagging. I'm checking with our deal desk on the bundling option and will have an answer for you by end of week. In the meantime, I wanted to share the updated proposal deck with the three-year pricing breakdown. Let me know if you have questions ahead of our next call."
+
+[No follow-up sent by end of week. Jordan has not replied since.]
+
+---
+
+EMAIL THREAD 2: Integration and SLA
+-------------------------------------
+Date: April 7, 2026
+From: Priya Nair
+To: Alex
+
+"Alex, circling back on the SLA discussion from the discovery call. Before we can move forward internally, our security and compliance team needs written confirmation of 99.9% uptime SLA and your incident response process. Can you point me to the right documentation or have your legal team send something over?"
+
+---
+
+Date: April 8, 2026
+From: Alex
+To: Priya Nair
+
+"Hi Priya, absolutely. I've looped in our legal team and they're pulling the SLA documentation together now. I'll have this to you within the week. Thanks for your patience."
+
+[Documentation not yet sent as of April 23, 2026. This is now 15 days outstanding.]
+
+---
+
+EMAIL THREAD 3: CFO Briefing Request
+--------------------------------------
+Date: April 15, 2026
+From: Jordan Mills
+To: Alex
+
+"Quick heads up, Alex. Marcus Webb (our CFO) was on the last call briefly and is going to be part of the final sign-off. He's not fully up to speed on the evaluation. I'd recommend we schedule a short 30-minute briefing with him before the final call so he's not coming in cold. Can you send over a one-pager we could share with him ahead of time? Something high-level, ROI-focused."
+
+---
+
+Date: April 16, 2026
+From: Alex
+To: Jordan Mills
+
+"Good thinking, Jordan. I'll put together a one-pager for Marcus this week and send it over. Let's also find 30 minutes to brief him directly before the sign-off call. I'll send a calendar invite for early next week."
+
+[One-pager not sent. Calendar invite not sent. No follow-up from Alex. This is a high-priority gap ahead of the next call.]

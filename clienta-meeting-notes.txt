@@ -1,0 +1,31 @@
+CLIENTA DISCOVERY CALL NOTES
+=============================
+Date: March 18, 2026
+Attendees: Alex (AE), Jordan Mills (VP RevOps, ClientA), Priya Nair (Dir. Sales Tech, ClientA)
+Duration: 45 minutes
+
+SUMMARY
+-------
+Strong discovery call. Jordan came prepared with specific pain points and a clear sense of urgency tied to the LegacyTech contract expiration in June. Priya was more cautious but engaged positively once we walked through the integration architecture.
+
+KEY PAIN POINTS DISCUSSED
+--------------------------
+1. Pipeline visibility: ClientA's current tool does not surface deal risk signals automatically. Reps are self-reporting stage changes, which creates lag and inaccuracy in forecast.
+2. Manual workload: RevOps spends roughly 12 hours per week on pipeline hygiene tasks that should be automated.
+3. Forecast accuracy: Current forecast accuracy sits at 54%. Jordan's target is 80%+ by Q3 2026.
+
+INTEGRATION DISCUSSION
+-----------------------
+Priya asked detailed questions about Salesforce integration. We confirmed bidirectional sync with sub-60-second latency. She asked about historical data migration. We said up to 3 years of historical data can be migrated as part of onboarding. She seemed satisfied but said she would need to validate with her team.
+
+OPEN ACTION ITEM (UNRESOLVED)
+------------------------------
+Alex committed to sending a one-pager on data migration scope and timeline by March 25. This was NOT sent. Jordan followed up via email on March 28. Alex responded with a partial answer but did not attach the document. This remains outstanding and should be addressed in the next call.
+
+NEXT CALL AGREED
+-----------------
+Agreed to reconvene in two weeks with a revised proposal including professional services bundling options. Jordan said Dana Cho (CRO) may join.
+
+NOTES ON TONE
+--------------
+Jordan is a strong internal champion but is under pressure from Dana to close something before end of Q2. The urgency is real. Do not let this deal drift.
