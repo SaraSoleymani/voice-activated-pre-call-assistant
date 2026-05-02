@@ -1,10 +1,10 @@
-# Pre-Call Assistant
+# Voice-Activated-Pre-Call Assistant
 
 A voice-activated pre-call intelligence tool for enterprise sales reps, built with Claude, MCP, and ElevenLabs.
 
 Part of the **Building with Agentic AI** series — Article 9: MCP: How Agents Connect to the World.
 
-Read the full article on [Medium](#) | Follow the series on [LinkedIn](#)
+Read the full article on [Medium](https://sarasoleymani.medium.com/) | Follow the series on [LinkedIn](https://www.linkedin.com/in/sarasoleymani/)
 
 ---
 
@@ -190,20 +190,18 @@ A few directions worth exploring once the base build is working:
 
 | Article | Topic |
 |---|---|
-| 1 | Picking the Right Problems for AI Agents |
-| 2 | What Is an Agentic System, Actually? |
-| 3 | Prompt Engineering for Builders |
-| 4 | AI Meeting Prep Assistant |
-| 5 | RAG for Revenue Teams |
-| 6 | Evaluations for Agentic AI |
-| 7 | Multi-Agent Systems |
-| 8 | Fine-Tuning and Intentional Knowledge Ingestion |
-| **9** | **MCP: How Agents Connect to the World** |
-| 10 | The Real Cost of Running AI Agents in Production |
+This project is part of Building with Agentic AI, a 10-article series on building production-grade agentic systems for GTM and sales teams.
 
-Written by Sara — GTM leader, builder, and former lead on custom foundational model development at Adobe.
+Article 1: How to Pick the Right Problems for AI Agents and Automation
+Article 2: Building AI Agents in Practice: A Sales Outreach Agent with n8n and Claude
+Article 3: Bad Prompt, Good Prompt, Great Prompt: The Practical Guide to Prompt Engineering [+ Sales Agent Example]
+Article 4: The AI Meeting Prep Assistant: From Problem to a Full Product with n8n and v0
+Article 5: RAG for Revenue Teams: From Simple Retrieval to Agentic and Graph RAG
+Article 6: Evals for Agentic AI: How to Know If Your System Actually Works + Hands on n8n JSON Files
+Article 7: Multi-Agent Systems (this project)
+Article 8: Fine-Tuning and Intentional Knowledge Ingestion (coming next)
 
-Follow the series on [Medium](#) and [LinkedIn](#).
+Follow the series on [Medium](https://sarasoleymani.medium.com/) and [LinkedIn](https://www.linkedin.com/in/sarasoleymani/).
 
 ---
 
